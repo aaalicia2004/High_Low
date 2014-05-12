@@ -1,5 +1,7 @@
 <?php
 
+var_dump($argv);
+
 //Get User's first name
 //Computer will generate a number
 //User will continue to guess the number
@@ -23,7 +25,9 @@
 
 //End the game
 
-$Winning_Number = rand(1, 100);
+$min = $argv[1];
+$max = $argv[2];
+$Winning_Number = rand($min, $max);
 $Number_of_Guesses = 1;
 
 fwrite(STDOUT, 'What is your first name? ');
@@ -32,23 +36,23 @@ fwrite(STDOUT, 'What is your first name? ');
 $first_name = fgets(STDIN);
 
 // Output the user's name
-fwrite(STDOUT, "Hello $first_name" . "I'm thinking of a number between 1 and 100.\nCan you guess which one it is?\n");
+fwrite(STDOUT, "Hello $first_name" . "I'm thinking of a number between $min and $max.\nCan you guess which one it is?\n");
  
 $User_Guess = fgets(STDIN);
-$Number_of_Guesses++;
 
 while($User_Guess != $Winning_Number)
 {
 	if($User_Guess < $Winning_Number)
 	{
-		echo "Higher";
+		echo "Higher\n";
 	}
 	else 
 	{
-		echo "Lower";
+		echo "Lower\n";
 	}
 fwrite(STDOUT, "Guess again!\n");
 $User_Guess = fgets(STDIN);
+$Number_of_Guesses++;
 }
 
 if ($User_Guess == $Winning_Number)
